@@ -9,9 +9,9 @@ app = Flask(__name__)
 app.secret_key = 'your secret key'
 
 # Enter your database connection details below
-app.config['MYSQL_HOST'] = "a2nlmysql39plsk.secureserver.net:3306"
+app.config['MYSQL_HOST'] = "a2nlmysql39plsk.secureserver.net"
 app.config['MYSQL_USER'] = 'master'
-app.config['MYSQL_PASSWORD'] = 'master'
+app.config['MYSQL_PASSWORD'] = 'master2023!'
 app.config['MYSQL_DB'] = 'geoSite'
 
 # Intialize MySQL
