@@ -104,7 +104,7 @@ def register():
     return render_template('register.html', msg=msg)
 
 
-@app.route("/hey")
+@app.route("/dashboard")
 def hey():
     return render_template('home.html', username="waddup")
 
