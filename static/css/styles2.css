@@ -223,7 +223,7 @@ h6 {
 /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
 .dropdown-container {
     display: none;
-    background-color: white;
+    background-color: #2F3947;
     padding-top: 15px;
     padding-left: 15px;
     margin-left:60px;
@@ -292,9 +292,9 @@ canvas {
 .material-icons {
     padding: 10px;
     color: #404040;
-    background-color: white;
+    background-color: #BFCADB;
     border-radius: 10px;
-    box-shadow: 10px 5px 5px lightgray;
+    box-shadow: 10px 5px 5px #4c5158;
     font-size: 15px;
 }
 
