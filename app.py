@@ -3,6 +3,8 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
 
+from app_helpers import *
+
 app = Flask(__name__)
 
 # Change this to your secret key (can be anything, it's for extra protection)
@@ -141,3 +143,56 @@ def profile():
     # User is not loggedin redirect to login page
     print("SKIPPED TO BASICALLY ELSE IN PROFILE")
     return redirect(url_for('login'))
+
+
+@app.route('/geojson-features', methods=['GET'])
+def get_all_points():
+
+    """
+    Grabs the polygons from the geojson, converts them to JSON format with geometry and data 
+    features and sends back to the webpage to render on the Leaflet map
+    """
+
+    print("here!!")
+
+    # Convert the geoJSON to a dataframe and merge it to the migration data
+    feature_df = convert_to_pandas(geodata_collection, MATCH_PATH, MONTH12_PATH)
+    feature_df['sum_num_intmig'] = feature_df['serial'].fillna(0)
+    feature_df['perc_migrants'] = feature_df['sum_num_intmig']# / feature_df['total_pop']
+    
+    print(feature_df)
+
+    # Make lists of all of the features we want available to the Leaflet map
+    coords = feature_df['geometry.coordinates']
+    types = feature_df['geometry.type']
+    num_migrants = feature_df['perc_migrants']
+    shapeIDs = feature_df['shapeID']
+    shapeNames = feature_df["properties.ipumns_simple_wgs_wdata_geo2_mx1960_2015_ADMIN_NAME"]
+
+    # For each of the polygons in the data frame, append it and it's data to a list 
+    # of dicts to be sent as a JSON back to the Leaflet map
+    features = []
+    for i in range(0, len(feature_df)):
+        features.append({
+            "type": "Feature",
+            "geometry": {
+                "type": types[i],
+                "coordinates": coords[i]
+            },
+            "properties": {'num_migrants': num_migrants[i],
+                           'shapeID': str(shapeIDs[i]),
+                           'shapeName': shapeNames[i]
+                          }
+        })
+
+    print("done up to here!!")
+
+
+    response = jsonify(features)
+
+    # Enable Access-Control-Allow-Origin
+    response.headers.add("Access-Control-Allow-Origin", "*")        
+
+    print("returning MAP!!")
+
+    return response
