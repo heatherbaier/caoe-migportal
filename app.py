@@ -21,7 +21,7 @@ mysql = MySQL(app)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('homepage.html', msg=msg)
+    return render_template('homepage.html')
 
 # http://localhost:5000/pythonlogin/ - the following will be our login page, which will use both GET and POST requests
 @app.route('/pythonlogin/', methods=['GET', 'POST'])
