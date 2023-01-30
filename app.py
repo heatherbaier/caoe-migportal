@@ -45,9 +45,9 @@ def login():
             session['id'] = account['id']
             session['username'] = account['username']
             # Redirect to home page
-            print("REDIRECTING TO HOME ", url_for('home'))
-            print(home)
-            return redirect(url_for('home'))
+            print("REDIRECTING TO HOME ", url_for('hey'))
+            print(hey)
+            return redirect(url_for('hey'))
         else:
             # Account doesn't exist or username/password incorrect
             msg = 'Incorrect username/password!'
@@ -102,6 +102,12 @@ def register():
         msg = 'Please fill out the form!'
     # Show registration form with message (if any)
     return render_template('register.html', msg=msg)
+
+
+@app.route("/hey")
+def hey():
+    return render_template('home.html', username="waddup")
+
 
 
 # http://localhost:5000/pythinlogin/home - this will be the home page, only accessible for loggedin users
