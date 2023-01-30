@@ -148,14 +148,14 @@ body.loggedin {
 }
 
 
-.column {
+.content > .column {
 	float: left;
-  }
+}
   
-  .left, .right {
+.content > .left, .content > .right {
 	width: 25%;
-  }
+}
   
-  .middle {
+.content > .middle {
 	width: 50%;
-  }
+}
