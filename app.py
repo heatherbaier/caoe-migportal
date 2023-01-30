@@ -45,7 +45,8 @@ def login():
             session['id'] = account['id']
             session['username'] = account['username']
             # Redirect to home page
-            return redirect(url_for('home2'))
+            print("REDIRECTING TO HOME ", url_for('home'))
+            return redirect(url_for('home'))
         else:
             # Account doesn't exist or username/password incorrect
             msg = 'Incorrect username/password!'
@@ -104,7 +105,7 @@ def register():
 
 # http://localhost:5000/pythinlogin/home - this will be the home page, only accessible for loggedin users
 @app.route('/home')
-def home2():
+def home():
     print("IN HOME FUNCTION")
     # Check if user is loggedin
     if 'loggedin' in session:
