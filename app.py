@@ -46,6 +46,7 @@ def login():
             session['username'] = account['username']
             # Redirect to home page
             print("REDIRECTING TO HOME ", url_for('home'))
+            print(home)
             return redirect(url_for('home'))
         else:
             # Account doesn't exist or username/password incorrect
